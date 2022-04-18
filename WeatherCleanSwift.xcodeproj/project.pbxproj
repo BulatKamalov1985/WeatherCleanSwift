@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */; };
 		399B140F28070DAF0020396D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B140E28070DAF0020396D /* AppDelegate.swift */; };
 		399B141128070DAF0020396D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141028070DAF0020396D /* SceneDelegate.swift */; };
 		399B141328070DAF0020396D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141228070DAF0020396D /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		399B140B28070DAF0020396D /* WeatherCleanSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCleanSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B140E28070DAF0020396D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		399B141028070DAF0020396D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		399B1456280932700020396D /* SRC */ = {
 			isa = PBXGroup;
 			children = (
+				396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */,
 				399B1457280932980020396D /* MainScene */,
 				399B145B2809338B0020396D /* DetaiScene */,
 			);
@@ -350,6 +353,7 @@
 				399B141928070DAF0020396D /* WeatherCleanSwift.xcdatamodeld in Sources */,
 				399B144C28071C380020396D /* MainSceneWorker.swift in Sources */,
 				399B141128070DAF0020396D /* SceneDelegate.swift in Sources */,
+				396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */,
 				399B144B28071C380020396D /* MainScenePresenter.swift in Sources */,
 				399B144E28071C380020396D /* MainSceneModels.swift in Sources */,
 				399B145028071C380020396D /* MainSceneProtocols.swift in Sources */,

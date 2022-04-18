@@ -18,9 +18,5 @@ final class MainSceneRouter: MainSceneRoutingLogic, MainSceneDataPassing {
 }
 
 private extension MainSceneRouter {
-//    func passDataTo_() {
-//        source: MainSceneDataStore,
-//        destination: inout SomewhereDataStore
-//    ) {
-//    }
+
 }

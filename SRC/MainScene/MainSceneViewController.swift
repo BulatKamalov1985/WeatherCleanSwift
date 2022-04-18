@@ -13,12 +13,10 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
     private let weatherLabel = UILabel()
     private let searchBar = UISearchBar()
     private let rightBarButton =  UIBarButtonItem()
+    private var collectionView: UICollectionView?
     
-    private var weatherModel: [MainScene.InitForm.ViewModel] =
-    [MainScene.InitForm.ViewModel(location: "Ufa", realTime: "13:20", currentTemperature: "33˚", lowTemperature: "L: 20˚", highTemperature: "H: 44˚", description: "Sun"),
-     MainScene.InitForm.ViewModel(location: "Sochi", realTime: "13:20", currentTemperature: "29˚", lowTemperature: "L: 19˚", highTemperature: "H: 55˚", description: "Rainy")]
-    
-    
+    private var weatherModel: [ViewModel] = []
+  
     private let interactor: MainSceneBusinessLogic
     private let router: MainSceneRoutingLogic
     
@@ -50,33 +48,20 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
     
     
     func setupCollectionView() {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .black
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "cell")
-        view.addSubview(collectionView)
+        collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "weatherCell")
+        collectionView.alwaysBounceVertical = true
+        
         collectionView.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 50).isActive =  true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        collectionView.widthAnchor.constraint(equalToConstant: 340).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
-    }
-    
-    private func createLayout() -> UICollectionViewLayout {
-        // section -> group -> items -> size
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize:  itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5,
-                                                     bottom: 5, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(0.17))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize ,
-                                                       subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive =  true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 240).isActive = true
+        self.collectionView = collectionView
     }
     
     func setupWeatherLabel() {
@@ -87,9 +72,7 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         weatherLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
         weatherLabel.textColor = .white
         weatherLabel.text = "Weather"
-        weatherLabel.font = UIFont(name: "SFProDisplay-Bold", size: 88)
-        
-        
+        weatherLabel.font = .boldSystemFont(ofSize: 35)
     }
     
     func setupSearchBar() {
@@ -110,44 +93,50 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         navigationItem.rightBarButtonItem = button
     }
     
-    
-    
     // MARK: - MainSceneDisplayLogic
     
-    func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel) {}
+    func displayInitForm(_ viewModel: ViewModel) {
+        weatherModel.append(viewModel)
+        collectionView?.reloadData()
+    }
     
     // MARK: - Private
     
     private func initForm() {
-        interactor.requestInitForm(MainScene.InitForm.Request())
+        interactor.requestInitForm(.cityWeather("denpasar"))
+        interactor.requestInitForm(.cityWeather("ufa"))
+        interactor.requestInitForm(.cityWeather("sochi"))
+        interactor.requestInitForm(.cityWeather("voronezh"))
+        interactor.requestInitForm(.cityWeather("batumi"))
+        interactor.requestInitForm(.cityWeather("moscow"))
+        interactor.requestInitForm(.cityWeather("paris"))
+        interactor.requestInitForm(.cityWeather("hanoi"))
+
     }
 }
 
-extension MainSceneViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MainSceneViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  weatherModel.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: WeatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! WeatherCell
+        let cell: WeatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCell
         
         let weatherModel = weatherModel[indexPath.row]
-        if indexPath.row == 0 {
-            cell.backgroundImageView.image = UIImage(named: "dark sky")
-        } else {
-            cell.backgroundImageView.image = UIImage(named: "blue sky")        }
-        cell.locationLabel.text = weatherModel.location
-        cell.realTimeLabel.text = weatherModel.realTime
-        cell.currentTemperatureLabel.text = weatherModel.currentTemperature
-        cell.lowTemperatureLabel.text = weatherModel.lowTemperature
-        cell.highTemperatureLabel.text = weatherModel.highTemperature
-        cell.descriptionLabel.text = weatherModel.description
+        
+        cell.configure(weatherModel: weatherModel, indexPath: indexPath)
+        
         cell.layer.cornerRadius = 12
         cell.clipsToBounds = true
       
-        
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            CGSize(width: (self.collectionView?.frame.size.width) ?? 200, height: 120)
+    
+        }
 }
 
