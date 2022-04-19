@@ -15,40 +15,9 @@ enum MainScene {
         }
 
         struct Response: Decodable {
-
             // MARK: - CityWeather
-            struct CityWeather: Decodable {
-                let main: Main
-                let name: String
-                let sys: Sys
-            }
-
-            // MARK: - Main
-            struct Main: Decodable {
-                let temp: Double
-                let feelsLike: Double
-                let tempMin: Double
-                let tempMax: Double
-                let pressure: Int
-
-                enum CodingKeys: String, CodingKey {
-                    case temp
-                    case feelsLike = "feels_like"
-                    case tempMin = "temp_min"
-                    case tempMax = "temp_max"
-                    case pressure
-                }
-            }
-
-            struct Sys: Decodable {
-                let type: Int
-                let id: Int
-                let country: String
-                let sunrise: Int
-                let sunset: Int
-            }
+            let cityWeather: CityWeather
         }
-
         struct ViewModel {
             let name: String
             let temp: Int
@@ -57,6 +26,54 @@ enum MainScene {
             let tempMax: Int
             let country: String
             let pressure: Int
+            init(
+                name: String,
+                temp: Int,
+                feelsLike: Int,
+                tempMin: Int,
+                tempMax: Int,
+                country: String,
+                pressure: Int
+            ) {
+                self.name = name
+                self.temp = temp
+                self.feelsLike = feelsLike
+                self.tempMin = tempMin
+                self.tempMax = tempMax
+                self.country = country
+                self.pressure = pressure
+            }
         }
+    }
+
+    struct CityWeather: Decodable {
+        let main: Main
+        let name: String
+        let sys: Sys
+    }
+
+    // MARK: - Main
+    struct Main: Decodable {
+        let temp: Double
+        let feelsLike: Double
+        let tempMin: Double
+        let tempMax: Double
+        let pressure: Int
+
+        enum CodingKeys: String, CodingKey {
+            case temp
+            case feelsLike = "feels_like"
+            case tempMin = "temp_min"
+            case tempMax = "temp_max"
+            case pressure
+        }
+    }
+
+    struct Sys: Decodable {
+        let type: Int
+        let id: Int
+        let country: String
+        let sunrise: Int
+        let sunset: Int
     }
 }

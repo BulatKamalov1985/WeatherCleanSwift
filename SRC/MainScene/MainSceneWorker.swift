@@ -9,7 +9,6 @@
 import UIKit
 
 final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
-
     var session: URLSession
 
     init(
@@ -18,11 +17,12 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
         self.session = session
     }
 
-    func get(_ request: MainScene.InitForm.Request, completion: @escaping (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void) {
+    func get(_ request: MainScene.InitForm.Request, completion: @escaping (
+        Result<MainScene.CityWeather, NetworkError>) -> Void) {
         print("start func get")
         let endPoint: EndpointTypeProtocol = EndPoint(request: request)
         print("endPoint")
-        let completionWrapper: (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void = { result in
+        let completionWrapper: (Result<MainScene.CityWeather, NetworkError>) -> Void = { result in
             print("switch result")
             switch result {
             case .success(let succes):
@@ -39,7 +39,6 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
 }
 
 private struct EndPoint: EndpointTypeProtocol {
-
     let request: MainScene.InitForm.Request
 
     var stringUrl: String {
@@ -66,4 +65,3 @@ private struct EndPoint: EndpointTypeProtocol {
         }
     }
 }
-

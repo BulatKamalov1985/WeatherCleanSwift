@@ -9,7 +9,6 @@
 import UIKit
 
 final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
-
     private let weatherLabel: UILabel = {
         let weatherLabel = UILabel()
         weatherLabel.textColor = .white
@@ -25,7 +24,7 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         searchBar.layer.cornerRadius = 10
         return searchBar
     }()
-    private let rightBarButton =  UIBarButtonItem()
+    private let rightBarButton = UIBarButtonItem()
     private var collectionView: UICollectionView?
 
     private var weatherModel: [MainScene.InitForm.ViewModel] = []
@@ -59,7 +58,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         setupRightButtonItem()
         view.backgroundColor = .black
         setupAlert()
-
     }
 
     func setupCollectionView() {
@@ -72,10 +70,16 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "weatherCell")
         collectionView.alwaysBounceVertical = true
 
-        collectionView.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 50).isActive =  true
-        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive =  true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 240).isActive = true
+        collectionView.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 50).isActive = true
+        collectionView.leadingAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0
+        ).isActive = true
+        collectionView.trailingAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0
+        ).isActive = true
+        collectionView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 240
+        ).isActive = true
         self.collectionView = collectionView
     }
 
@@ -96,13 +100,17 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
     }
 
     func setupRightButtonItem() {
-        let button = UIBarButtonItem(image: UIImage(named: "button"), style: .plain, target: self, action: #selector(setupAlert))
+        let button = UIBarButtonItem(
+            image: UIImage(named: "button"),
+            style: .plain,
+            target: self,
+            action: #selector(setupAlert)
+        )
         button.tintColor = .white
         navigationItem.rightBarButtonItem = button
     }
 
     @objc func setupAlert() {
-
         let alert = UIAlertController(title: "Add City?", message: "Pleace add city", preferredStyle: .alert)
         let findCityAction = UIAlertAction(title: "Add", style: .default) { [weak alert] _ in
             self.initForm(cityName: alert?.textFields?.first?.text ?? "")
@@ -117,7 +125,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         alert.addAction(cancelAction)
 
         self.present(alert, animated: true, completion: nil)
-
     }
 
     func errorAlertController () {
@@ -135,7 +142,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         self.weatherModelFiltred = self.weatherModel
         collectionView?.reloadData()
     }
-
     private func initForm(cityName: String) {
         if weatherModel.isEmpty {
             interactor.requestInitForm(MainScene.InitForm.Request.cityWeather(cityName))
@@ -143,14 +149,20 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
     }
 }
 
-extension MainSceneViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+extension MainSceneViewController: UICollectionViewDataSource,
+                                   UICollectionViewDelegate,
+                                   UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  self.weatherModelFiltred.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: WeatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCell
+    func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell: WeatherCell = (
+            collectionView.dequeueReusableCell(
+                withReuseIdentifier: "weatherCell", for: indexPath
+                                              ) as? WeatherCell)!
 
         let weatherModel = self.weatherModelFiltred[indexPath.row]
 
@@ -162,9 +174,12 @@ extension MainSceneViewController: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         CGSize(width: (self.collectionView?.frame.size.width) ?? 200, height: 120)
-
     }
 }
 
@@ -177,7 +192,7 @@ extension MainSceneViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
-        self.weatherModelFiltred = weatherModel.filter { $0.name.hasPrefix(searchText)}
+        self.weatherModelFiltred = weatherModel.filter { $0.name.hasPrefix(searchText) }
         //        self.weatherModelFiltred = searchText.isEmpty ? weatherModel : weatherModel.filter({ viewModel in
         //            return viewModel.name.range(of: searchText, options: .caseInsensitive) != nil
         //        })

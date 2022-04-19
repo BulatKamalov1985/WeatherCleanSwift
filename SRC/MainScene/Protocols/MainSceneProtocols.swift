@@ -17,11 +17,13 @@ protocol MainSceneBusinessLogic {
 }
 
 protocol MainSceneWorkerLogic {
-    func get(_ request: MainScene.InitForm.Request, completion: @escaping (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void)
+    func get(_ request: MainScene.InitForm.Request, completion: @escaping (
+        Result<MainScene.CityWeather, NetworkError>
+    ) -> Void)
 }
 
 protocol MainScenePresentationLogic {
-    func presentInitForm(_ response: MainScene.InitForm.Response.CityWeather)
+    func presentInitForm(_ response: MainScene.CityWeather)
     func presentErrorAlertController()
 }
 

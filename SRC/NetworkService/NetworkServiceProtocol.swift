@@ -13,7 +13,11 @@ protocol EndpointTypeProtocol {
 
 protocol NetworkSessionProtocol {
     var session: URLSession { get set }
-    func network<Success: Decodable>(endpoint: EndpointTypeProtocol, completion: @escaping (Result<Success, NetworkError>) -> Void)
+    func network<Success: Decodable>(
+        endpoint: EndpointTypeProtocol,
+        completion: @escaping (Result<Success, NetworkError>
+        ) -> Void
+    )
 }
 
 extension EndpointTypeProtocol {
@@ -23,7 +27,10 @@ extension EndpointTypeProtocol {
 }
 
 extension NetworkSessionProtocol {
-    func  network<Success: Decodable>(endpoint: EndpointTypeProtocol, completion: @escaping (Result<Success, NetworkError>) -> Void) {
+    func  network<Success: Decodable>(
+        endpoint: EndpointTypeProtocol,
+        completion: @escaping (Result<Success, NetworkError>) -> Void
+    ) {
         guard let url = endpoint.url else {
             completion(.failure(.badRequest))
             print("completion failure network")

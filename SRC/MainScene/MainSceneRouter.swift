@@ -18,5 +18,4 @@ final class MainSceneRouter: MainSceneRoutingLogic, MainSceneDataPassing {
 }
 
 private extension MainSceneRouter {
-
 }

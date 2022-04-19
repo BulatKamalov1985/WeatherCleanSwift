@@ -8,7 +8,6 @@
 import UIKit
 
 class WeatherCell: UICollectionViewCell {
-
     var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.textColor = .white
@@ -91,23 +90,34 @@ class WeatherCell: UICollectionViewCell {
         countryLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
 
         backgroundImageView.addSubview(currentTemperatureLabel)
-        currentTemperatureLabel.topAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: 5).isActive = true
-        currentTemperatureLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -10).isActive = true
+        currentTemperatureLabel.topAnchor.constraint(
+            equalTo: backgroundImageView.topAnchor, constant: 5
+        ).isActive = true
+        currentTemperatureLabel.trailingAnchor.constraint(
+            equalTo: backgroundImageView.trailingAnchor, constant: -10
+        ).isActive = true
         currentTemperatureLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
 
         backgroundImageView.addSubview(lowTemperatureLabel)
-        lowTemperatureLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -20).isActive = true
-        lowTemperatureLabel.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 15).isActive = true
+        lowTemperatureLabel.trailingAnchor.constraint(
+            equalTo: backgroundImageView.trailingAnchor, constant: -20
+        ).isActive = true
+        lowTemperatureLabel.topAnchor.constraint(
+            equalTo: currentTemperatureLabel.bottomAnchor, constant: 15
+        ).isActive = true
 
         backgroundImageView.addSubview(highTemperatureLabel)
-        highTemperatureLabel.trailingAnchor.constraint(equalTo: lowTemperatureLabel.leadingAnchor, constant: -5).isActive = true
-        highTemperatureLabel.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 15).isActive = true
+        highTemperatureLabel.trailingAnchor.constraint(
+            equalTo: lowTemperatureLabel.leadingAnchor, constant: -5
+        ).isActive = true
+        highTemperatureLabel.topAnchor.constraint(
+            equalTo: currentTemperatureLabel.bottomAnchor, constant: 15
+        ).isActive = true
 
         backgroundImageView.addSubview(pressureLabel)
         pressureLabel.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor, constant: 20).isActive = true
         pressureLabel.topAnchor.constraint(equalTo: countryLabel.bottomAnchor, constant: 10).isActive = true
         pressureLabel.widthAnchor.constraint(equalToConstant: 195).isActive = true
-
     }
 
     func configure(weatherModel: MainScene.InitForm.ViewModel, indexPath: IndexPath) {
@@ -123,7 +133,5 @@ class WeatherCell: UICollectionViewCell {
         self.lowTemperatureLabel.text = "L: \(weatherModel.tempMin)°"
         self.highTemperatureLabel.text = "H: \(weatherModel.tempMax)°"
         self.pressureLabel.text = "Pressure: \(weatherModel.pressure)"
-
     }
-
 }
