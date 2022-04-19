@@ -10,7 +10,7 @@ import Foundation
 final class MainSceneInteractor: MainSceneBusinessLogic, MainSceneDataStore {
     private let presenter: MainScenePresentationLogic
     private let worker: MainSceneWorkerLogic
-    
+
     init(
         presenter: MainScenePresentationLogic,
         worker: MainSceneWorkerLogic
@@ -18,18 +18,22 @@ final class MainSceneInteractor: MainSceneBusinessLogic, MainSceneDataStore {
         self.presenter = presenter
         self.worker = worker
     }
-    
-    func requestInitForm(_ request: RequestModel) {
+
+    func requestInitForm(_ request: MainScene.InitForm.Request) {
         print("start worker.get(request)")
         worker.get(request) { [weak self] result in
             print("comletion worker result")
             DispatchQueue.main.async {
-                switch result {
-                case .success(let weather):
-                    print("presenter.presentInitForm(weather)", weather.main.temp)
-                    self?.presenter.presentInitForm(weather)
-                case .failure(_): return
+                guard let succes = try? result.get()
+                else {
+                    self?.presenter.presentErrorAlertController()
+                    return
                 }
+                self?.presenter.presentInitForm(succes)
+                //                switch result {
+                //                case .success(let weather): self?.presenter.presentInitForm(weather)
+                //                case.failure(_): self?.presenter.presentErrorAlertController()
+
             }
         }
     }

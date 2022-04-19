@@ -7,18 +7,23 @@
 //
 
 final class MainScenePresenter: MainScenePresentationLogic {
-  
+
+    func presentErrorAlertController() {
+        viewController?.errorAlertController()
+    }
+
     weak var viewController: MainSceneDisplayLogic?
 
-    func presentInitForm(_ response: ResponseModel) {
-        let temp = Int(response.main.temp) - 273
-        let feelsLike = Int(response.main.feelsLike) - 273
-        let tempMin = Int(response.main.tempMin) - 273
-        let tempMax = Int(response.main.tempMax) - 273
-        let name = response.name
-        let country = response.sys.country
-        let pressure = response.main.pressure
-        
-        viewController?.displayInitForm(ViewModel(name: name, temp: temp, feelsLike: feelsLike, tempMin: tempMin, tempMax: tempMax, country: country, pressure: pressure))
+    func presentInitForm(_ response: MainScene.InitForm.Response.CityWeather) {
+
+        viewController?.displayInitForm(MainScene.InitForm.ViewModel(
+            name: response.name,
+            temp: Int(response.main.temp),
+            feelsLike: Int(response.main.feelsLike),
+            tempMin: Int(response.main.tempMin),
+            tempMax: Int(response.main.tempMax),
+            country: response.sys.country,
+            pressure: response.main.pressure
+        ))
     }
 }

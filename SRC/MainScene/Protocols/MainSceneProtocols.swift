@@ -13,19 +13,21 @@ protocol MainSceneDataPassing {
 protocol MainSceneDataStore {}
 
 protocol MainSceneBusinessLogic {
-    func requestInitForm(_ request: RequestModel)
+    func requestInitForm(_ request: MainScene.InitForm.Request)
 }
 
 protocol MainSceneWorkerLogic {
-    func get(_ request: RequestModel, completion: @escaping (Result<ResponseModel, NetworkError>) -> Void)
+    func get(_ request: MainScene.InitForm.Request, completion: @escaping (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void)
 }
 
 protocol MainScenePresentationLogic {
-    func presentInitForm(_ response: ResponseModel)
+    func presentInitForm(_ response: MainScene.InitForm.Response.CityWeather)
+    func presentErrorAlertController()
 }
 
 protocol MainSceneDisplayLogic: AnyObject {
-    func displayInitForm(_ viewModel: ViewModel)
+    func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel)
+    func errorAlertController()
 }
 
 protocol MainSceneRoutingLogic {}

@@ -11,19 +11,16 @@ protocol EndpointTypeProtocol {
     var stringUrl: String { get }
 }
 
-
 protocol NetworkSessionProtocol {
     var session: URLSession { get set }
     func network<Success: Decodable>(endpoint: EndpointTypeProtocol, completion: @escaping (Result<Success, NetworkError>) -> Void)
 }
-
 
 extension EndpointTypeProtocol {
     var url: URL? {
         return URLComponents(string: stringUrl)?.url
     }
 }
-
 
 extension NetworkSessionProtocol {
     func  network<Success: Decodable>(endpoint: EndpointTypeProtocol, completion: @escaping (Result<Success, NetworkError>) -> Void) {
@@ -32,8 +29,8 @@ extension NetworkSessionProtocol {
             print("completion failure network")
             return
         }
-        let task = session.dataTask(with: url) { data, response, error in
-            if let data = data{
+        let task = session.dataTask(with: url) { data, _, _ in
+            if let data = data {
                 do {
                     let weather = try JSONDecoder().decode(Success.self, from: data)
                     completion(.success(weather))
@@ -57,4 +54,3 @@ extension NetworkSessionProtocol {
 enum NetworkError: Error {
     case badRequest
 }
-

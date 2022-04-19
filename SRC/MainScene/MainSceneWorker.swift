@@ -9,20 +9,20 @@
 import UIKit
 
 final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
-   
+
     var session: URLSession
-    
+
     init(
         session: URLSession = URLSession(configuration: .default)
     ) {
         self.session = session
     }
-    
-    func get(_ request: RequestModel, completion: @escaping (Result<ResponseModel, NetworkError>) -> Void) {
+
+    func get(_ request: MainScene.InitForm.Request, completion: @escaping (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void) {
         print("start func get")
         let endPoint: EndpointTypeProtocol = EndPoint(request: request)
         print("endPoint")
-        let completionWrapper: (Result<ResponseModel, NetworkError>) -> Void = { result in
+        let completionWrapper: (Result<MainScene.InitForm.Response.CityWeather, NetworkError>) -> Void = { result in
             print("switch result")
             switch result {
             case .success(let succes):
@@ -38,27 +38,27 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
     }
 }
 
-private struct EndPoint : EndpointTypeProtocol {
-    
-  
-    let request: RequestModel
-    
+private struct EndPoint: EndpointTypeProtocol {
+
+    let request: MainScene.InitForm.Request
+
     var stringUrl: String {
-        scheme + host + path
+        "https://\(host)\(path)=\(body)&\(unitsMetric)&appid=\(keyAPI)"
     }
-    
-    private var scheme: String {
-        "https://"
-    }
-    
+
     private var host: String {
         "api.openweathermap.org/"
     }
-    
+
     var path: String {
-        "data/2.5/weather?q=\(body)&appid=cfb589760c9c0d83a8f525619f805670"
+        "data/2.5/weather?q"
     }
-    
+    var unitsMetric: String {
+        "units=metric"
+    }
+    var keyAPI: String {
+        "cfb589760c9c0d83a8f525619f805670"
+    }
     var body: String {
         switch request {
         case .cityWeather(let city):
@@ -67,5 +67,3 @@ private struct EndPoint : EndpointTypeProtocol {
     }
 }
 
-    
-    

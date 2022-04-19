@@ -5,36 +5,32 @@
 //  Created by Bulat Kamalov on 13.04.2022.
 //  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
 //
-import Foundation
-import UIKit
 
-typealias ViewModel = MainScene.InitForm.ViewModel
-typealias RequestModel = MainScene.InitForm.Request
-typealias ResponseModel = MainScene.InitForm.Response.CityWeather
+import UIKit
 
 enum MainScene {
     enum InitForm {
         enum Request {
             case cityWeather(String)
         }
-        
+
         struct Response: Decodable {
-            
+
             // MARK: - CityWeather
-            struct CityWeather: Codable {
+            struct CityWeather: Decodable {
                 let main: Main
                 let name: String
                 let sys: Sys
             }
-            
+
             // MARK: - Main
-            struct Main: Codable {
+            struct Main: Decodable {
                 let temp: Double
                 let feelsLike: Double
                 let tempMin: Double
                 let tempMax: Double
                 let pressure: Int
-               
+
                 enum CodingKeys: String, CodingKey {
                     case temp
                     case feelsLike = "feels_like"
@@ -43,8 +39,8 @@ enum MainScene {
                     case pressure
                 }
             }
-            
-            struct Sys: Codable {
+
+            struct Sys: Decodable {
                 let type: Int
                 let id: Int
                 let country: String
@@ -52,7 +48,7 @@ enum MainScene {
                 let sunset: Int
             }
         }
-        
+
         struct ViewModel {
             let name: String
             let temp: Int
@@ -64,4 +60,3 @@ enum MainScene {
         }
     }
 }
-
