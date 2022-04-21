@@ -2,34 +2,34 @@
 //  NetworkServiceProtocol.swift
 //  WeatherCleanSwift
 //
-//  Created by Bulat Kamalov on 18.04.2022.
+//  Created by Bulat Kamalov on 15.04.2022.
 //
 
 import Foundation
 
 protocol EndpointTypeProtocol {
-    var stringUrl: String { get }
+    var path: String { get set }
 }
 
 protocol NetworkSessionProtocol {
     var session: URLSession { get set }
     func network<Success: Decodable>(
         endpoint: EndpointTypeProtocol,
-        completion: @escaping (Result<Success, NetworkError>
-        ) -> Void
+        completion: @escaping (Result<Success, NetworkError>) -> Void
     )
 }
 
 extension EndpointTypeProtocol {
     var url: URL? {
-        return URLComponents(string: stringUrl)?.url
+        return URLComponents(string: path)?.url
     }
 }
 
 extension NetworkSessionProtocol {
     func  network<Success: Decodable>(
         endpoint: EndpointTypeProtocol,
-        completion: @escaping (Result<Success, NetworkError>) -> Void
+        completion: @escaping (Result<Success, NetworkError>
+        ) -> Void
     ) {
         guard let url = endpoint.url else {
             completion(.failure(.badRequest))

@@ -11,7 +11,8 @@ import UIKit
 enum MainSceneAssembly {
     static func build() -> UIViewController {
         let presenter = MainScenePresenter()
-        let worker = MainSceneWorker()
+        let storage = MainSceneStorage()
+        let worker = MainSceneWorker(storage: storage)
         let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
         let router = MainSceneRouter(dataStore: interactor)
         let viewController = MainSceneViewController(interactor: interactor, router: router)

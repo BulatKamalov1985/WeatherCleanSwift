@@ -119,19 +119,13 @@ class WeatherCell: UICollectionViewCell {
         pressureLabel.topAnchor.constraint(equalTo: countryLabel.bottomAnchor, constant: 10).isActive = true
         pressureLabel.widthAnchor.constraint(equalToConstant: 195).isActive = true
     }
-
-    func configure(weatherModel: MainScene.InitForm.ViewModel, indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            self.backgroundImageView.image = UIImage(named: "dark sky")
-//        } else {
-//            self.backgroundImageView.image = UIImage(named: "blue sky")
-//        }
+    func configure(object: MainScene.CityWeather, indexPath: Int) {
         self.backgroundImageView.image = UIImage(named: "blue sky")
-        self.locationLabel.text = weatherModel.name
-        self.countryLabel.text = weatherModel.country
-        self.currentTemperatureLabel.text = "\(weatherModel.temp)°"
-        self.lowTemperatureLabel.text = "L: \(weatherModel.tempMin)°"
-        self.highTemperatureLabel.text = "H: \(weatherModel.tempMax)°"
-        self.pressureLabel.text = "Pressure: \(weatherModel.pressure)"
+        self.locationLabel.text = object.name
+        self.countryLabel.text = object.sys.country
+        self.currentTemperatureLabel.text = "\(object.main.temp)°"
+        self.lowTemperatureLabel.text = "L: \(object.main.tempMin)°"
+        self.highTemperatureLabel.text = "H: \(object.main.tempMax)°"
+        self.pressureLabel.text = "Pressure: \(object.main.pressure)"
     }
 }

@@ -17,19 +17,31 @@ protocol MainSceneBusinessLogic {
 }
 
 protocol MainSceneWorkerLogic {
-    func get(_ request: MainScene.InitForm.Request, completion: @escaping (
-        Result<MainScene.CityWeather, NetworkError>
-    ) -> Void)
+    func getBaseWeatherFromUserDefaults(
+    _ request: MainScene.InitForm.Request,
+    completion: @escaping ([MainScene.CityWeather]) -> Void
+    )
+    func getBaseWeather(
+        _ request: MainScene.InitForm.Request,
+        completion: @escaping (Result<[MainScene.CityWeather], NetworkError>) -> Void
+    )
 }
 
 protocol MainScenePresentationLogic {
-    func presentInitForm(_ response: MainScene.CityWeather)
+    func presentInitForm(_ response: MainScene.InitForm.Response)
     func presentErrorAlertController()
+    func presentStorageIsEmty()
 }
 
 protocol MainSceneDisplayLogic: AnyObject {
     func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel)
     func errorAlertController()
+    func displayStorageIsEmpty()
 }
 
 protocol MainSceneRoutingLogic {}
+
+protocol CitiesStorageProtocol {
+    func saveObject(_ object: MainScene.CityWeather)
+    func loadObject() -> [MainScene.CityWeather]?
+}

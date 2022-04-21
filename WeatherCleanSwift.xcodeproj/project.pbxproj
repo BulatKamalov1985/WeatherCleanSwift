@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */; };
+		396AAD8A280EE01E00A3B735 /* MainSceneStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */; };
 		399B140F28070DAF0020396D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B140E28070DAF0020396D /* AppDelegate.swift */; };
 		399B141128070DAF0020396D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141028070DAF0020396D /* SceneDelegate.swift */; };
 		399B141328070DAF0020396D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141228070DAF0020396D /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneStorageManager.swift; sourceTree = "<group>"; };
 		399B140B28070DAF0020396D /* WeatherCleanSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCleanSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B140E28070DAF0020396D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		399B141028070DAF0020396D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,11 +106,17 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
+		396AAD88280EDFF600A3B735 /* StorageManagers */ = {
+			isa = PBXGroup;
+			children = (
+				396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */,
+			);
+			path = StorageManagers;
+			sourceTree = "<group>";
+		};
 		399B140228070DAF0020396D = {
 			isa = PBXGroup;
 			children = (
-				399B1456280932700020396D /* SRC */,
-				399B1458280932C00020396D /* Services */,
 				399B140D28070DAF0020396D /* WeatherCleanSwift */,
 				399B142728070DB10020396D /* WeatherCleanSwiftTests */,
 				399B143128070DB10020396D /* WeatherCleanSwiftUITests */,
@@ -129,6 +137,7 @@
 		399B140D28070DAF0020396D /* WeatherCleanSwift */ = {
 			isa = PBXGroup;
 			children = (
+				399B1456280932700020396D /* SRC */,
 				399B140E28070DAF0020396D /* AppDelegate.swift */,
 				399B141028070DAF0020396D /* SceneDelegate.swift */,
 				399B141228070DAF0020396D /* ViewController.swift */,
@@ -168,6 +177,7 @@
 		399B1456280932700020396D /* SRC */ = {
 			isa = PBXGroup;
 			children = (
+				396AAD88280EDFF600A3B735 /* StorageManagers */,
 				396AAD84280D419400A3B735 /* NetworkService */,
 				399B1457280932980020396D /* MainScene */,
 			);
@@ -188,21 +198,6 @@
 				399B1455280931CC0020396D /* Scene Cell */,
 			);
 			path = MainScene;
-			sourceTree = "<group>";
-		};
-		399B1458280932C00020396D /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				399B1459280932DA0020396D /* Network service */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		399B1459280932DA0020396D /* Network service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Network service";
 			sourceTree = "<group>";
 		};
 		399B145A2809330B0020396D /* Protocols */ = {
@@ -355,7 +350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexpectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexpectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -376,6 +371,7 @@
 				399B141128070DAF0020396D /* SceneDelegate.swift in Sources */,
 				396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */,
 				399B144B28071C380020396D /* MainScenePresenter.swift in Sources */,
+				396AAD8A280EE01E00A3B735 /* MainSceneStorageManager.swift in Sources */,
 				399B144E28071C380020396D /* MainSceneModels.swift in Sources */,
 				399B145028071C380020396D /* MainSceneProtocols.swift in Sources */,
 			);

@@ -21,19 +21,22 @@ final class MainSceneInteractor: MainSceneBusinessLogic, MainSceneDataStore {
 
     func requestInitForm(_ request: MainScene.InitForm.Request) {
         print("start worker.get(request)")
-        worker.get(request) { [weak self] result in
+        worker.getBaseWeather(request) { [weak self] result in
             print("comletion worker result")
             DispatchQueue.main.async {
-                guard let succes = try? result.get()
-                else {
-                    self?.presenter.presentErrorAlertController()
-                    return
+                switch result {
+                case .success(let success):
+                    print("case .success(let success):")
+                    let response = MainScene.InitForm.Response(cityWeather: success)
+                    self?.presenter.presentInitForm(response)
+                case .failure(let error):
+                    print("case .failure(let error):")
+                    if error == .srorageIsEmty {
+                        self?.presenter.presentStorageIsEmty()
+                    } else {
+                        self?.presenter.presentErrorAlertController()
+                    }
                 }
-                self?.presenter.presentInitForm(succes)
-                //                switch result {
-                //                case .success(let weather): self?.presenter.presentInitForm(weather)
-                //                case.failure(_): self?.presenter.presentErrorAlertController()
-
             }
         }
     }
