@@ -9,10 +9,10 @@
 import UIKit
 
 final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
-    var storage: CitiesStorageProtocol
+    var storage: MainSceneStorageProtocol
     var session: URLSession
     init(
-        storage: CitiesStorageProtocol,
+        storage: MainSceneStorageProtocol,
         session: URLSession = URLSession(configuration: .default)
     ) {
         self.session = session
@@ -44,16 +44,6 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
             print("network")
             network(endpoint: endPoint, completion: completionWrapper)
         }
-    }
-    func getBaseWeatherFromUserDefaults(
-        _ request: MainScene.InitForm.Request,
-        completion: @escaping ([MainScene.CityWeather]
-        ) -> Void
-    ) {
-        if let object = storage.loadObject() {
-            completion(object)
-        }
-        return completion([])
     }
 }
 private struct EndPoint: EndpointTypeProtocol {

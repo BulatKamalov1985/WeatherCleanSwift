@@ -17,10 +17,6 @@ protocol MainSceneBusinessLogic {
 }
 
 protocol MainSceneWorkerLogic {
-    func getBaseWeatherFromUserDefaults(
-    _ request: MainScene.InitForm.Request,
-    completion: @escaping ([MainScene.CityWeather]) -> Void
-    )
     func getBaseWeather(
         _ request: MainScene.InitForm.Request,
         completion: @escaping (Result<[MainScene.CityWeather], NetworkError>) -> Void
@@ -41,7 +37,7 @@ protocol MainSceneDisplayLogic: AnyObject {
 
 protocol MainSceneRoutingLogic {}
 
-protocol CitiesStorageProtocol {
+protocol MainSceneStorageProtocol {
     func saveObject(_ object: MainScene.CityWeather)
     func loadObject() -> [MainScene.CityWeather]?
 }

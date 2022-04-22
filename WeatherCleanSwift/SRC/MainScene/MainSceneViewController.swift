@@ -26,14 +26,11 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
     }()
     private let rightBarButton = UIBarButtonItem()
     private var collectionView: UICollectionView?
-
     private var weatherModel: MainScene.InitForm.ViewModel?
     private var weatherModelFiltred: MainScene.InitForm.ViewModel?
     private var isSearchingInSearchBar: Bool = false
-
     private let interactor: MainSceneBusinessLogic
     private let router: MainSceneRoutingLogic
-
     init(
         interactor: MainSceneBusinessLogic,
         router: MainSceneRoutingLogic
@@ -42,12 +39,10 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         self.router = router
         super.init(nibName: nil, bundle: nil)
     }
-
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
@@ -55,15 +50,12 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         setupWeatherLabel()
         setupRightButtonItem()
         view.backgroundColor = .black
-//        setupAlert()
         searchBar.delegate = self
         initForm()
     }
-
     func displayStorageIsEmpty() {
         setupAlert()
     }
-
     func setupCollectionView() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.addSubview(collectionView)
@@ -73,7 +65,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         collectionView.dataSource = self
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "weatherCell")
         collectionView.alwaysBounceVertical = true
-
         collectionView.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 50).isActive = true
         collectionView.leadingAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0
@@ -86,7 +77,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         ).isActive = true
         self.collectionView = collectionView
     }
-
     func setupWeatherLabel() {
         view.addSubview(weatherLabel)
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +84,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         weatherLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         weatherLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
-
     func setupSearchBar() {
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +92,6 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 141).isActive = true
     }
-
     func setupRightButtonItem() {
         let button = UIBarButtonItem(
             image: UIImage(named: "button"),
@@ -114,17 +102,15 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         button.tintColor = .white
         navigationItem.rightBarButtonItem = button
     }
-
     @objc func setupAlert() {
         let alert = UIAlertController(title: "Add City?", message: "Pleace add city", preferredStyle: .alert)
         let findCityAction = UIAlertAction(title: "Add", style: .default) { [weak alert] _ in
             guard let textFields = alert?.textFields else { return }
-            if let cityText = textFields.first?.text {
+            if let cityText = textFields[0].text {
                 self.interactor.requestInitForm(MainScene.InitForm.Request(firstLoad: false, cityWeather: cityText))
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
         alert.addTextField { textField in
             textField.placeholder = "City"
         }
@@ -132,16 +118,13 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
-
     func errorAlertController () {
         let errorAC = UIAlertController(title: "Sorry", message: "We did not find such a city", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         errorAC.addAction(okAction)
         present(errorAC, animated: true, completion: nil)
     }
-
     // MARK: - MainSceneDisplayLogic
-
     func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel) {
         if weatherModel == nil {
             self.weatherModel = .init(cityWeather: viewModel.cityWeather)
@@ -151,9 +134,9 @@ final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
         collectionView?.reloadData()
     }
     private func initForm() {
-            interactor.requestInitForm(MainScene.InitForm.Request(firstLoad: true))
-        }
+        interactor.requestInitForm(MainScene.InitForm.Request(firstLoad: true))
     }
+}
 extension MainSceneViewController: UICollectionViewDataSource,
                                    UICollectionViewDelegate,
                                    UICollectionViewDelegateFlowLayout {
@@ -167,10 +150,10 @@ extension MainSceneViewController: UICollectionViewDataSource,
     func collectionView(
         _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "weatherCell",
-                for: indexPath
-            ) as? WeatherCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "weatherCell",
+            for: indexPath
+        ) as? WeatherCell else { return UICollectionViewCell() }
         var object: MainScene.CityWeather?
         if isSearchingInSearchBar {
             object = weatherModelFiltred?.cityWeather[indexPath.row]
@@ -181,8 +164,7 @@ extension MainSceneViewController: UICollectionViewDataSource,
             cell.configure(object: object, indexPath: indexPath.row)
         }
         return cell
-}
-
+    }
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -197,13 +179,13 @@ extension MainSceneViewController: UISearchBarDelegate {
         searchBar.text = ""
         searchBar.endEditing(true)
     }
-
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             weatherModelFiltred?.cityWeather.removeAll()
             isSearchingInSearchBar = false
         } else {
             isSearchingInSearchBar = true
+            weatherModelFiltred?.cityWeather = weatherModel?.cityWeather.filter { $0.name.hasPrefix(searchText) } ?? []
         }
         collectionView?.reloadData()
     }

@@ -28,7 +28,7 @@ class WeatherCell: UICollectionViewCell {
         let currentTemperatureLabel = UILabel()
         currentTemperatureLabel.textColor = .white
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentTemperatureLabel.font = .boldSystemFont(ofSize: 50)
+        currentTemperatureLabel.font = .boldSystemFont(ofSize: 40)
         currentTemperatureLabel.textAlignment = .right
         return currentTemperatureLabel
     }()
@@ -58,6 +58,7 @@ class WeatherCell: UICollectionViewCell {
     }()
     var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView()
+        backgroundImageView.clipsToBounds = true
         backgroundImageView.layer.cornerRadius = 20
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
@@ -96,7 +97,7 @@ class WeatherCell: UICollectionViewCell {
         currentTemperatureLabel.trailingAnchor.constraint(
             equalTo: backgroundImageView.trailingAnchor, constant: -10
         ).isActive = true
-        currentTemperatureLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        currentTemperatureLabel.widthAnchor.constraint(equalToConstant: 140).isActive = true
 
         backgroundImageView.addSubview(lowTemperatureLabel)
         lowTemperatureLabel.trailingAnchor.constraint(

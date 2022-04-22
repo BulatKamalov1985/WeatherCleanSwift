@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainSceneStorage: CitiesStorageProtocol {
+class MainSceneStorage: MainSceneStorageProtocol {
     private let key = "weather"
     private let userDefoultManager: UserDefaults
     init(userDefoultManager: UserDefaults = .standard) {

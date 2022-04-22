@@ -10,17 +10,18 @@ import Foundation
 
 final class MainScenePresenter: MainScenePresentationLogic {
     weak var viewController: MainSceneDisplayLogic?
+
     func presentErrorAlertController() {
         viewController?.errorAlertController()
     }
-    func presentInitForm(_ response: MainScene.InitForm.Response) {
-        let weatherModel = response.cityWeather.map { element in
-            MainScene.CityWeather(main: element.main, name: element.name, sys: element.sys)
-        }
-        let viewModel = MainScene.InitForm.ViewModel(cityWeather: weatherModel )
-        viewController?.displayInitForm(viewModel)
-        }
+
     func presentStorageIsEmty() {
         viewController?.displayStorageIsEmpty()
+    }
+
+    func presentInitForm(_ response: MainScene.InitForm.Response) {
+        let weatherModel: [MainScene.CityWeather] = response.cityWeather
+        let viewModel = MainScene.InitForm.ViewModel(cityWeather: weatherModel)
+        viewController?.displayInitForm(viewModel)
     }
 }

@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3914565A2811942A0032B4E6 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391456592811942A0032B4E6 /* PresenterTests.swift */; };
+		3914565C281195BE0032B4E6 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914565B281195BE0032B4E6 /* ViewControllerMock.swift */; };
 		396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */; };
 		396AAD8A280EE01E00A3B735 /* MainSceneStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */; };
+		396AAD8D2811556700A3B735 /* WorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD8C2811556700A3B735 /* WorkerTests.swift */; };
+		396AAD8F2811586800A3B735 /* StorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD8E2811586800A3B735 /* StorageMock.swift */; };
+		396AAD91281158B100A3B735 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD90281158B100A3B735 /* SessionMock.swift */; };
 		399B140F28070DAF0020396D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B140E28070DAF0020396D /* AppDelegate.swift */; };
 		399B141128070DAF0020396D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141028070DAF0020396D /* SceneDelegate.swift */; };
 		399B141328070DAF0020396D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141228070DAF0020396D /* ViewController.swift */; };
 		399B141928070DAF0020396D /* WeatherCleanSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 399B141728070DAF0020396D /* WeatherCleanSwift.xcdatamodeld */; };
 		399B141B28070DB00020396D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 399B141A28070DB00020396D /* Assets.xcassets */; };
 		399B141E28070DB00020396D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 399B141C28070DB00020396D /* LaunchScreen.storyboard */; };
-		399B142928070DB10020396D /* WeatherCleanSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B142828070DB10020396D /* WeatherCleanSwiftTests.swift */; };
 		399B143328070DB10020396D /* WeatherCleanSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B143228070DB10020396D /* WeatherCleanSwiftUITests.swift */; };
 		399B143528070DB10020396D /* WeatherCleanSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B143428070DB10020396D /* WeatherCleanSwiftUITestsLaunchTests.swift */; };
 		399B144B28071C380020396D /* MainScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B144328071C380020396D /* MainScenePresenter.swift */; };
@@ -47,8 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		391456592811942A0032B4E6 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
+		3914565B281195BE0032B4E6 /* ViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneStorageManager.swift; sourceTree = "<group>"; };
+		396AAD8C2811556700A3B735 /* WorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerTests.swift; sourceTree = "<group>"; };
+		396AAD8E2811586800A3B735 /* StorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMock.swift; sourceTree = "<group>"; };
+		396AAD90281158B100A3B735 /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		399B140B28070DAF0020396D /* WeatherCleanSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCleanSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B140E28070DAF0020396D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		399B141028070DAF0020396D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +67,6 @@
 		399B141D28070DB00020396D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		399B141F28070DB00020396D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		399B142428070DB10020396D /* WeatherCleanSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherCleanSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		399B142828070DB10020396D /* WeatherCleanSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCleanSwiftTests.swift; sourceTree = "<group>"; };
 		399B142E28070DB10020396D /* WeatherCleanSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherCleanSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B143228070DB10020396D /* WeatherCleanSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCleanSwiftUITests.swift; sourceTree = "<group>"; };
 		399B143428070DB10020396D /* WeatherCleanSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCleanSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -152,7 +160,11 @@
 		399B142728070DB10020396D /* WeatherCleanSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				399B142828070DB10020396D /* WeatherCleanSwiftTests.swift */,
+				396AAD8C2811556700A3B735 /* WorkerTests.swift */,
+				396AAD8E2811586800A3B735 /* StorageMock.swift */,
+				391456592811942A0032B4E6 /* PresenterTests.swift */,
+				3914565B281195BE0032B4E6 /* ViewControllerMock.swift */,
+				396AAD90281158B100A3B735 /* SessionMock.swift */,
 			);
 			path = WeatherCleanSwiftTests;
 			sourceTree = "<group>";
@@ -218,7 +230,7 @@
 				399B140728070DAF0020396D /* Sources */,
 				399B140828070DAF0020396D /* Frameworks */,
 				399B140928070DAF0020396D /* Resources */,
-				396AAD85280E8ACC00A3B735 /* ShellScript */,
+				3914565D281278640032B4E6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -335,7 +347,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		396AAD85280E8ACC00A3B735 /* ShellScript */ = {
+		3914565D281278640032B4E6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -350,7 +362,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexpectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n\n\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexpectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -381,7 +393,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				399B142928070DB10020396D /* WeatherCleanSwiftTests.swift in Sources */,
+				396AAD8D2811556700A3B735 /* WorkerTests.swift in Sources */,
+				396AAD91281158B100A3B735 /* SessionMock.swift in Sources */,
+				3914565A2811942A0032B4E6 /* PresenterTests.swift in Sources */,
+				3914565C281195BE0032B4E6 /* ViewControllerMock.swift in Sources */,
+				396AAD8F2811586800A3B735 /* StorageMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
