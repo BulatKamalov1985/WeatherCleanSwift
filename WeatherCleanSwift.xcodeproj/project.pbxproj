@@ -9,14 +9,16 @@
 /* Begin PBXBuildFile section */
 		3914565A2811942A0032B4E6 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391456592811942A0032B4E6 /* PresenterTests.swift */; };
 		3914565C281195BE0032B4E6 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914565B281195BE0032B4E6 /* ViewControllerMock.swift */; };
+		39145660281566E80032B4E6 /* InteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914565F281566E80032B4E6 /* InteractorTests.swift */; };
+		39145662281569B20032B4E6 /* PresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39145661281569B20032B4E6 /* PresenterMock.swift */; };
+		39145664281569C70032B4E6 /* WorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39145663281569C70032B4E6 /* WorkerMock.swift */; };
+		391456682816651E0032B4E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391456672816651E0032B4E6 /* ViewController.swift */; };
 		396AAD83280D3FC100A3B735 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */; };
 		396AAD8A280EE01E00A3B735 /* MainSceneStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */; };
 		396AAD8D2811556700A3B735 /* WorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD8C2811556700A3B735 /* WorkerTests.swift */; };
 		396AAD8F2811586800A3B735 /* StorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD8E2811586800A3B735 /* StorageMock.swift */; };
-		396AAD91281158B100A3B735 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396AAD90281158B100A3B735 /* SessionMock.swift */; };
 		399B140F28070DAF0020396D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B140E28070DAF0020396D /* AppDelegate.swift */; };
 		399B141128070DAF0020396D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141028070DAF0020396D /* SceneDelegate.swift */; };
-		399B141328070DAF0020396D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399B141228070DAF0020396D /* ViewController.swift */; };
 		399B141928070DAF0020396D /* WeatherCleanSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 399B141728070DAF0020396D /* WeatherCleanSwift.xcdatamodeld */; };
 		399B141B28070DB00020396D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 399B141A28070DB00020396D /* Assets.xcassets */; };
 		399B141E28070DB00020396D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 399B141C28070DB00020396D /* LaunchScreen.storyboard */; };
@@ -53,15 +55,17 @@
 /* Begin PBXFileReference section */
 		391456592811942A0032B4E6 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
 		3914565B281195BE0032B4E6 /* ViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
+		3914565F281566E80032B4E6 /* InteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorTests.swift; sourceTree = "<group>"; };
+		39145661281569B20032B4E6 /* PresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterMock.swift; sourceTree = "<group>"; };
+		39145663281569C70032B4E6 /* WorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerMock.swift; sourceTree = "<group>"; };
+		391456672816651E0032B4E6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../../../.Trash/ViewController.swift; sourceTree = "<group>"; };
 		396AAD82280D3FC100A3B735 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		396AAD89280EE01E00A3B735 /* MainSceneStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneStorageManager.swift; sourceTree = "<group>"; };
 		396AAD8C2811556700A3B735 /* WorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerTests.swift; sourceTree = "<group>"; };
 		396AAD8E2811586800A3B735 /* StorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMock.swift; sourceTree = "<group>"; };
-		396AAD90281158B100A3B735 /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		399B140B28070DAF0020396D /* WeatherCleanSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCleanSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B140E28070DAF0020396D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		399B141028070DAF0020396D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		399B141228070DAF0020396D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		399B141828070DAF0020396D /* WeatherCleanSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherCleanSwift.xcdatamodel; sourceTree = "<group>"; };
 		399B141A28070DB00020396D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		399B141D28070DB00020396D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,6 +110,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39145665281664680032B4E6 /* Moks */ = {
+			isa = PBXGroup;
+			children = (
+				396AAD8E2811586800A3B735 /* StorageMock.swift */,
+				3914565B281195BE0032B4E6 /* ViewControllerMock.swift */,
+				39145663281569C70032B4E6 /* WorkerMock.swift */,
+				39145661281569B20032B4E6 /* PresenterMock.swift */,
+			);
+			path = Moks;
+			sourceTree = "<group>";
+		};
+		391456662816649F0032B4E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				399B141028070DAF0020396D /* SceneDelegate.swift */,
+				399B140E28070DAF0020396D /* AppDelegate.swift */,
+				399B141A28070DB00020396D /* Assets.xcassets */,
+				399B141C28070DB00020396D /* LaunchScreen.storyboard */,
+				399B141728070DAF0020396D /* WeatherCleanSwift.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		396AAD84280D419400A3B735 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,13 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				399B1456280932700020396D /* SRC */,
-				399B140E28070DAF0020396D /* AppDelegate.swift */,
-				399B141028070DAF0020396D /* SceneDelegate.swift */,
-				399B141228070DAF0020396D /* ViewController.swift */,
-				399B141A28070DB00020396D /* Assets.xcassets */,
-				399B141C28070DB00020396D /* LaunchScreen.storyboard */,
+				391456662816649F0032B4E6 /* Resources */,
 				399B141F28070DB00020396D /* Info.plist */,
-				399B141728070DAF0020396D /* WeatherCleanSwift.xcdatamodeld */,
+				391456672816651E0032B4E6 /* ViewController.swift */,
 			);
 			path = WeatherCleanSwift;
 			sourceTree = "<group>";
@@ -161,10 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				396AAD8C2811556700A3B735 /* WorkerTests.swift */,
-				396AAD8E2811586800A3B735 /* StorageMock.swift */,
 				391456592811942A0032B4E6 /* PresenterTests.swift */,
-				3914565B281195BE0032B4E6 /* ViewControllerMock.swift */,
-				396AAD90281158B100A3B735 /* SessionMock.swift */,
+				3914565F281566E80032B4E6 /* InteractorTests.swift */,
+				39145665281664680032B4E6 /* Moks */,
 			);
 			path = WeatherCleanSwiftTests;
 			sourceTree = "<group>";
@@ -362,7 +384,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexpectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n";
+			shellScript = "expectedVersion='0.42.0'\nversion=$(swiftlint version)\n\nif [ \"$version\" != \"$expectedVersion\" ]\nthen\n  echo 'error: Не установлен SwiftLint требуемой версии '$expectedVersion'. Ваши правки могут не пройти пайплайны. Нужный SwiftLint можно установить используя инструкцию http://wiki.corp.dev.vtb/pages/viewpage.action?pageId=287924307.'\nelse\n  swiftlint --config ../.swiftlint.yml  --path ..\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -371,8 +393,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391456682816651E0032B4E6 /* ViewController.swift in Sources */,
 				399B144D28071C380020396D /* MainSceneRouter.swift in Sources */,
-				399B141328070DAF0020396D /* ViewController.swift in Sources */,
 				399B145228071C380020396D /* MainSceneInteractor.swift in Sources */,
 				399B144F28071C380020396D /* MainSceneViewController.swift in Sources */,
 				399B1454280815160020396D /* WeatherCell.swift in Sources */,
@@ -394,10 +416,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				396AAD8D2811556700A3B735 /* WorkerTests.swift in Sources */,
-				396AAD91281158B100A3B735 /* SessionMock.swift in Sources */,
+				39145660281566E80032B4E6 /* InteractorTests.swift in Sources */,
+				39145662281569B20032B4E6 /* PresenterMock.swift in Sources */,
 				3914565A2811942A0032B4E6 /* PresenterTests.swift in Sources */,
 				3914565C281195BE0032B4E6 /* ViewControllerMock.swift in Sources */,
 				396AAD8F2811586800A3B735 /* StorageMock.swift in Sources */,
+				39145664281569C70032B4E6 /* WorkerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

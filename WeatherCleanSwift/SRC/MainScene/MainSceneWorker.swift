@@ -38,7 +38,8 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
                 case .success(let success):
                     self.storage.saveObject(success)
                     completion(.success([success]))
-                case .failure(_): completion(.failure(.badRequest))
+                case .failure(_):
+                    completion(.failure(.errorJSON))
                 }
             }
             print("network")

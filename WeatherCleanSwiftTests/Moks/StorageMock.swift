@@ -9,13 +9,16 @@ import Foundation
 @testable import WeatherCleanSwift
 final class StorageMock: MainSceneStorageProtocol {
     var saveObjectTests = false
+    var loadObjectTest = false
+    var object: MainScene.CityWeather?
+    var saveObject: [MainScene.CityWeather]?
+
     func saveObject(_ object: MainScene.CityWeather) {
         saveObjectTests = true
+        self.object = object
     }
-    var loadObjectTest = false
     func loadObject() -> [MainScene.CityWeather]? {
-        let object = ([MainScene.CityWeather])()
         loadObjectTest = true
-        return object
+        return saveObject
     }
 }

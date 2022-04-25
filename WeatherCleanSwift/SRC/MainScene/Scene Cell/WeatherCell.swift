@@ -124,9 +124,9 @@ class WeatherCell: UICollectionViewCell {
         self.backgroundImageView.image = UIImage(named: "blue sky")
         self.locationLabel.text = object.name
         self.countryLabel.text = object.sys.country
-        self.currentTemperatureLabel.text = "\(object.main.temp)°"
-        self.lowTemperatureLabel.text = "L: \(object.main.tempMin)°"
-        self.highTemperatureLabel.text = "H: \(object.main.tempMax)°"
+        self.currentTemperatureLabel.text = "\(Int(object.main.temp))°"
+        self.lowTemperatureLabel.text = "L: \(Int(object.main.tempMin))°"
+        self.highTemperatureLabel.text = "H: \(Int(object.main.tempMax))°"
         self.pressureLabel.text = "Pressure: \(object.main.pressure)"
     }
 }

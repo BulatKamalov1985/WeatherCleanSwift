@@ -31,7 +31,7 @@ extension NetworkSessionProtocol {
         completion: @escaping (Result<Success, NetworkError>) -> Void
     ) {
         guard let url = endpoint.url else {
-            completion(.failure(.errorJSON))
+            completion(.failure(.badRequest))
             print("completion failure network")
             return
         }

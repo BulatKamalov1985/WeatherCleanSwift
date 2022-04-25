@@ -9,15 +9,17 @@ import Foundation
 @testable import WeatherCleanSwift
 final class ViewControllerMock: MainSceneDisplayLogic {
     var displayInitFormIsCalled = false
+    var errorAlertControllerIsCalled = false
+    var displayStorageIsEmptyisCalled = false
+
     func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel) {
         displayInitFormIsCalled = true
     }
-        var errorAlertControllerIsCalled = false
+
     func errorAlertController() {
         errorAlertControllerIsCalled = true
     }
 
-    var displayStorageIsEmptyisCalled = false
     func displayStorageIsEmpty() {
         displayStorageIsEmptyisCalled = true
     }
