@@ -61,4 +61,5 @@ enum NetworkError: Error {
     case badRequest
     case errorJSON
     case srorageIsEmty
+    case unknownError
 }

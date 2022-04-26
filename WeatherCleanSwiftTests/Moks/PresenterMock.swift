@@ -9,11 +9,11 @@ import Foundation
 @testable import WeatherCleanSwift
 
 final class PresenterMock: MainScenePresentationLogic {
-    var presenterWasCalled = false
+    var presentInitFormWasCalled = false
     var errorAlertControllerWasCalled = false
     var storageIsEmptyWasCalled = false
     func presentInitForm(_ response: MainScene.InitForm.Response) {
-        presenterWasCalled = true
+        presentInitFormWasCalled = true
     }
 
     func presentErrorAlertController() {

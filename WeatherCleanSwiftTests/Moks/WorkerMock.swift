@@ -21,7 +21,7 @@ class WorkerMock: MainSceneWorkerLogic, NetworkSessionProtocol {
         getBaseWeatherWasCalled = true
         guard let result = result
         else {
-            completion(.failure(.errorJSON))
+            completion(.failure(.unknownError))
             return
         }
         completion(result)

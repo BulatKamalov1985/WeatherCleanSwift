@@ -14,35 +14,49 @@ final class InteractorTests: XCTestCase {
     let worker = WorkerMock()
     func testGetBaseWeatherWasCalled() {
         let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
-        let request = MainScene.InitForm.Request(firstLoad: true, cityWeather: "Ufa")
+        let request = MainScene.InitForm.Request(firstLoad: true)
         interactor.requestInitForm(request)
         XCTAssert(worker.getBaseWeatherWasCalled, "функция getBaseWeather должна быть вызывана, флаг TRUE")
     }
-//    Проверяем на правильный город через замоканный result
+///    Проверяем на правильный город через замоканный result
     func testCheckingForCorrectCityInput() {
         let citiesArray = Array(repeating: mockWeather(), count: 2)
         worker.result = .success(citiesArray)
         let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
-        let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "Ufa")
+        let request = MainScene.InitForm.Request(firstLoad: false)
         let expectation = XCTestExpectation(description: "wait city")
         interactor.requestInitForm(request)
         DispatchQueue.main.async {
-            XCTAssert(self.presenter.presenterWasCalled, "Отправляем данные в презентер, флаг TRUE")
+            XCTAssert(self.presenter.presentInitFormWasCalled, "Отправляем данные в презентер, флаг TRUE")
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 1)
     }
-//    Проверяем на вызов при неправильном вводе города
-    func testCheckingForUnCorrectCityInput() {
+///  Проверяем на вызов метода presentStorageIsEmty
+    func testCheckingForErrorJSON() {
+        worker.result = .failure(.srorageIsEmty)
         let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
-        let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "NoUfa")
+        let request = MainScene.InitForm.Request(firstLoad: false)
+        let expectation = XCTestExpectation(description: "wait city")
+        interactor.requestInitForm(request)
+        DispatchQueue.main.async {
+            XCTAssert(self.presenter.storageIsEmptyWasCalled, "Вызываем alert, флаг TRUE")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    ///  Проверяем на вызов метода presentErrorAlertControlle
+    func testCheckingForStorageIsEmpty() {
+        worker.result = .failure(.errorJSON)
+        let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
+        let request = MainScene.InitForm.Request(firstLoad: false)
         let expectation = XCTestExpectation(description: "wait city")
         interactor.requestInitForm(request)
         DispatchQueue.main.async {
             XCTAssert(self.presenter.errorAlertControllerWasCalled, "Вызываем alert, флаг TRUE")
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 1)
     }
 }
 

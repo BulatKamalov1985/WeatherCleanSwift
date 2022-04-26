@@ -10,7 +10,7 @@ import XCTest
 @testable import WeatherCleanSwift
 
 final class WorekerTests: XCTestCase {
-    //    Проверка на певый вход и загрузку из стораджа
+    ///    Проверка на певый вход и загрузку из стораджа
     func testSaveObject() {
         let storage = StorageMock()
         let worker = MainSceneWorker(storage: storage)
@@ -18,8 +18,7 @@ final class WorekerTests: XCTestCase {
         worker.getBaseWeather(request, completion: { _ in })
         XCTAssert(storage.loadObjectTest, "функция loadObject должна быть вызывана флаг TRUE")
     }
-
-    //    Проверка на пустой сторадж
+    ///    Проверка на пустой сторадж
     func testIfSrorageIsEmty() {
         let storage = StorageMock()
         let worker = MainSceneWorker(storage: storage)
@@ -34,15 +33,14 @@ final class WorekerTests: XCTestCase {
         })
         XCTAssert(storage.loadObjectTest, "функция loadObject должна быть вызывана флаг TRUE")
     }
-
-    // Проверка на декодинг и сохранение в сторадж
+    /// Проверка на декодинг и сохранение в сторадж
     func testDecodeSuccess() {
         let storageMock = StorageMock()
         let JSONSuccess = jsonMockSucces
         let sessionMock = UrlSessionMock(data: JSONSuccess, urlResponse: nil, error: nil)
         let worker = MainSceneWorker(storage: storageMock, session: sessionMock)
         let request = MainScene.InitForm.Request(firstLoad: false)
-        let expectation2 = expectation(description: "\(#function)\(#line)")
+        let expectation = expectation(description: "\(#function)\(#line)")
         let object = mockWeather()
         storageMock.object = object
         worker.getBaseWeather(request) { result in
@@ -53,16 +51,14 @@ final class WorekerTests: XCTestCase {
             case .failure:
                 XCTFail("Fail")
             }
-            expectation2.fulfill()
+            expectation.fulfill()
         }
-        wait(for: [expectation2], timeout: 1)
-        XCTAssert(storageMock.saveObjectTests, "должны зайти в loadOblect()")
+        wait(for: [expectation], timeout: 1)
     }
-
-    //    Проверка на ошибку в JSON
+    ///    Проверка на ошибку в JSON
     func testDecodeFailure() {
         let storageMock = StorageMock()
-        let sessionMock = UrlSessionMock(data: nil, urlResponse: nil, error: nil)
+        let sessionMock = UrlSessionMock(data: jsonMockFailure, urlResponse: nil, error: nil)
         let worker = MainSceneWorker(storage: storageMock, session: sessionMock)
         let request = MainScene.InitForm.Request(firstLoad: false)
         sessionMock.data = jsonMockFailure
@@ -78,17 +74,23 @@ final class WorekerTests: XCTestCase {
         })
         wait(for: [expectation1], timeout: 1)
     }
-//    Проверка на правильность ввода города
+    ///   Проверка на правильность ввода города
     func testsUnknownCity() {
-        let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "ggggg")
+        let sessionMock = UrlSessionMock(data: jsonMockSucces, urlResponse: nil, error: nil)
+        let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "gvjh")
         let storage = StorageMock()
-        let worker = MainSceneWorker(storage: storage)
-        let addAbsentAllerExpection = XCTestExpectation(description: "Ждем Alert")
-        worker.getBaseWeather(request, completion: {_ in
-            addAbsentAllerExpection.fulfill()
-        })
-        wait(for: [addAbsentAllerExpection], timeout: 2)
-        XCTAssertFalse(storage.saveObjectTests, "Объект не сохранен, потому что неправильный город")
+        let worker = MainSceneWorker(storage: storage, session: sessionMock)
+        let addErrorAllerExpection = XCTestExpectation(description: "Ждем Alert")
+        worker.getBaseWeather(request) { result in
+            switch result {
+            case .success(let response):
+                XCTAssertFalse(request.cityWeather == response[0].name, "Результат должен быть равным Ufa")
+            case .failure:
+                XCTFail("Fail")
+            }
+            addErrorAllerExpection.fulfill()
+        }
+        wait(for: [addErrorAllerExpection], timeout: 1)
     }
 }
 
@@ -121,7 +123,6 @@ class MockTask: URLSessionDataTask {
     override var error: Error? {
         return _error
     }
-
     var completionHandler: ((Data?, URLResponse?, Error?) -> Void)!
     init(data: Data?, urlResponse: URLResponse?, error: Error?) {
         self.data = data
