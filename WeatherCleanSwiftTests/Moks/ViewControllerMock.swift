@@ -11,6 +11,7 @@ final class ViewControllerMock: MainSceneDisplayLogic {
     var displayInitFormIsCalled = false
     var errorAlertControllerIsCalled = false
     var displayStorageIsEmptyisCalled = false
+    var interactorTest = false
 
     func displayInitForm(_ viewModel: MainScene.InitForm.ViewModel) {
         displayInitFormIsCalled = true
@@ -22,5 +23,7 @@ final class ViewControllerMock: MainSceneDisplayLogic {
 
     func displayStorageIsEmpty() {
         displayStorageIsEmptyisCalled = true
+    }
+    private func initForm() {
     }
 }

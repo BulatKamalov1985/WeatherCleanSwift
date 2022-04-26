@@ -78,6 +78,18 @@ final class WorekerTests: XCTestCase {
         })
         wait(for: [expectation1], timeout: 1)
     }
+//    Проверка на правильность ввода города
+    func testsUnknownCity() {
+        let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "ggggg")
+        let storage = StorageMock()
+        let worker = MainSceneWorker(storage: storage)
+        let addAbsentAllerExpection = XCTestExpectation(description: "Ждем Alert")
+        worker.getBaseWeather(request, completion: {_ in
+            addAbsentAllerExpection.fulfill()
+        })
+        wait(for: [addAbsentAllerExpection], timeout: 2)
+        XCTAssertFalse(storage.saveObjectTests, "Объект не сохранен, потому что неправильный город")
+    }
 }
 
 private func mockWeather() -> MainScene.CityWeather {

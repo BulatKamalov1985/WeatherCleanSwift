@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MainSceneViewController: ViewController, MainSceneDisplayLogic {
+final class MainSceneViewController: UIViewController, MainSceneDisplayLogic {
     private let weatherLabel: UILabel = {
         let weatherLabel = UILabel()
         weatherLabel.textColor = .white
@@ -183,6 +183,7 @@ extension MainSceneViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             weatherModelFiltred?.cityWeather.removeAll()
             isSearchingInSearchBar = false
+            collectionView?.reloadData()
         } else {
             isSearchingInSearchBar = true
             weatherModelFiltred?.cityWeather = weatherModel?.cityWeather.filter { $0.name.hasPrefix(searchText) } ?? []

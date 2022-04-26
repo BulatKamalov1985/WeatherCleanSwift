@@ -18,10 +18,10 @@ final class MainSceneInteractor: MainSceneBusinessLogic, MainSceneDataStore {
         self.presenter = presenter
         self.worker = worker
     }
-
+// получаем данные из VC
     func requestInitForm(_ request: MainScene.InitForm.Request) {
         print("start worker.get(request)")
-        worker.getBaseWeather(request) { [weak self] result in
+        worker.getBaseWeather(request) {[weak self] result in
             print("comletion worker result")
             DispatchQueue.main.async {
                 switch result {
