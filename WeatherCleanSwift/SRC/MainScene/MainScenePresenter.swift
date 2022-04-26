@@ -18,7 +18,7 @@ final class MainScenePresenter: MainScenePresentationLogic {
     func presentStorageIsEmty() {
         viewController?.displayStorageIsEmpty()
     }
-
+// получаем респонс из интерактора
     func presentInitForm(_ response: MainScene.InitForm.Response) {
         let weatherModel: [MainScene.CityWeather] = response.cityWeather
         let viewModel = MainScene.InitForm.ViewModel(cityWeather: weatherModel)

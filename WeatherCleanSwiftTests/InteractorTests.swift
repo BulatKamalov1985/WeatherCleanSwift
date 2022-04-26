@@ -20,6 +20,8 @@ final class InteractorTests: XCTestCase {
     }
 //    Проверяем на правильный город через замоканный result
     func testCheckingForCorrectCityInput() {
+        let citiesArray = Array(repeating: mockWeather(), count: 2)
+        worker.result = .success(citiesArray)
         let interactor = MainSceneInteractor(presenter: presenter, worker: worker)
         let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "Ufa")
         let expectation = XCTestExpectation(description: "wait city")
@@ -28,7 +30,7 @@ final class InteractorTests: XCTestCase {
             XCTAssert(self.presenter.presenterWasCalled, "Отправляем данные в презентер, флаг TRUE")
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3)
     }
 //    Проверяем на вызов при неправильном вводе города
     func testCheckingForUnCorrectCityInput() {
@@ -40,6 +42,12 @@ final class InteractorTests: XCTestCase {
             XCTAssert(self.presenter.errorAlertControllerWasCalled, "Вызываем alert, флаг TRUE")
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3)
     }
+}
+
+private func mockWeather() -> MainScene.CityWeather {
+    let main = MainScene.Main(temp: 22, feelsLike: 11, tempMin: 22, tempMax: 33, pressure: 33)
+    let sys = MainScene.Sys(type: 22, id: 1, country: "Ru", sunrise: 1, sunset: 1)
+    return .init(main: main, name: "Ufa", sys: sys)
 }
