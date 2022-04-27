@@ -27,7 +27,7 @@ final class InteractorTests: XCTestCase {
         let expectation = XCTestExpectation(description: "wait city")
         interactor.requestInitForm(request)
         DispatchQueue.main.async {
-            XCTAssert(self.presenter.presentInitFormWasCalled, "Отправляем данные в презентер, флаг TRUE")
+            XCTAssert(self.presenter.presentInitFormWasCalled, "Отправляем данные в презентор, флаг TRUE")
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)

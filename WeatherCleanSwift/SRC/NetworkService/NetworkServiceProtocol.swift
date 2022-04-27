@@ -42,7 +42,7 @@ extension NetworkSessionProtocol {
                     completion(.success(weather))
                     print("good decode weather", weather.self)
                 } catch {
-                    completion(.failure(.badRequest))
+                    completion(.failure(.decodeError))
                     print("no good")
                     return
                 }
@@ -62,4 +62,5 @@ enum NetworkError: Error {
     case errorJSON
     case srorageIsEmty
     case unknownError
+    case decodeError
 }

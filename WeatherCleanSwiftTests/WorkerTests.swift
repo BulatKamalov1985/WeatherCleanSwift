@@ -11,12 +11,12 @@ import XCTest
 
 final class WorekerTests: XCTestCase {
     ///    Проверка на певый вход и загрузку из стораджа
-    func testSaveObject() {
-        let storage = StorageMock()
-        let worker = MainSceneWorker(storage: storage)
+    func testLoadObjectWasCalled() {
+        let storageMock = StorageMock()
+        let worker = MainSceneWorker(storage: storageMock)
         let request = MainScene.InitForm.Request(firstLoad: true)
-        worker.getBaseWeather(request, completion: { _ in })
-        XCTAssert(storage.loadObjectTest, "функция loadObject должна быть вызывана флаг TRUE")
+        worker.getBaseWeather(request) { _ in }
+        XCTAssert(storageMock.loadObjectWasCalled, "функция loadObject должна быть вызывана флаг TRUE")
     }
     ///    Проверка на пустой сторадж
     func testIfSrorageIsEmty() {
@@ -26,12 +26,12 @@ final class WorekerTests: XCTestCase {
         worker.getBaseWeather(request, completion: { result in
             switch result {
             case .success:
-                XCTFail("Fail")
+                XCTFail("Должна быть ошибка srorageIsEmty")
             case .failure(let error):
                 XCTAssert(error == .srorageIsEmty, "Должна быть ошибка, что stotage пустой")
             }
+            XCTAssert(storage.loadObjectWasCalled, "функция loadObject должна быть вызывана флаг TRUE")
         })
-        XCTAssert(storage.loadObjectTest, "функция loadObject должна быть вызывана флаг TRUE")
     }
     /// Проверка на декодинг и сохранение в сторадж
     func testDecodeSuccess() {
@@ -49,7 +49,7 @@ final class WorekerTests: XCTestCase {
                 XCTAssert(response[0].name == "Ufa", "Результат должен быть равным Ufa")
                 XCTAssert(storageMock.object?.name == response[0].name)
             case .failure:
-                XCTFail("Fail")
+                XCTFail("Респонс должен быть равным Ufa")
             }
             expectation.fulfill()
         }
@@ -62,31 +62,31 @@ final class WorekerTests: XCTestCase {
         let worker = MainSceneWorker(storage: storageMock, session: sessionMock)
         let request = MainScene.InitForm.Request(firstLoad: false)
         sessionMock.data = jsonMockFailure
-        let expectation1 = expectation(description: "\(#function)\(#line)")
+        let expectation = expectation(description: "\(#function)\(#line)")
         worker.getBaseWeather(request, completion: { result in
             switch result {
             case .success:
-                XCTFail("Fail")
+                XCTFail("Должна быть ошибка errorJSON в парсинге ")
             case .failure(let error):
-                XCTAssert(error == .errorJSON, "Должна быть ошибка в парсинге JSON")
+                XCTAssert(error == .decodeError, "Должна быть ошибка в парсинге JSON")
             }
-            expectation1.fulfill()
+            expectation.fulfill()
         })
-        wait(for: [expectation1], timeout: 1)
+        wait(for: [expectation], timeout: 1)
     }
     ///   Проверка на правильность ввода города
     func testsUnknownCity() {
-        let sessionMock = UrlSessionMock(data: jsonMockSucces, urlResponse: nil, error: nil)
+        let sessionMock = UrlSessionMock(data: nil, urlResponse: nil, error: nil)
         let request = MainScene.InitForm.Request(firstLoad: false, cityWeather: "gvjh")
         let storage = StorageMock()
         let worker = MainSceneWorker(storage: storage, session: sessionMock)
         let addErrorAllerExpection = XCTestExpectation(description: "Ждем Alert")
         worker.getBaseWeather(request) { result in
             switch result {
-            case .success(let response):
-                XCTAssertFalse(request.cityWeather == response[0].name, "Результат должен быть равным Ufa")
-            case .failure:
-                XCTFail("Fail")
+            case .success(let success):
+                XCTFail("\(success), результат должен быть badRequest")
+            case .failure(let error):
+                XCTAssert(error == .badRequest, "Результат должен быть badRequest")
             }
             addErrorAllerExpection.fulfill()
         }

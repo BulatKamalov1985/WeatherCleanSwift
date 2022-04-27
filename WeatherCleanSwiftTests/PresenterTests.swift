@@ -10,19 +10,17 @@ import XCTest
 @testable import WeatherCleanSwift
 
 final class PresenterTests: XCTestCase {
+    let presenter = MainScenePresenter()
+    let viewController = ViewControllerMock()
+
     func testDisplayInitFormIsCalled() {
-        let cityWeather = [MainScene.CityWeather]()
-        let presenter = MainScenePresenter()
-        let viewController = ViewControllerMock()
         presenter.viewController = viewController
-        let response = MainScene.InitForm.Response(cityWeather: cityWeather)
+        let response = MainScene.InitForm.Response(cityWeather: [])
         presenter.presentInitForm(response)
         XCTAssertTrue(viewController.displayInitFormIsCalled, "Функция displayInitForm должна быть вызвана")
     }
 
     func testErrorAlertControllerIsCalled() {
-        let presenter = MainScenePresenter()
-        let viewController = ViewControllerMock()
         presenter.viewController = viewController
         presenter.presentErrorAlertController()
         XCTAssertTrue(
@@ -31,8 +29,6 @@ final class PresenterTests: XCTestCase {
     }
 
     func testStorageIsEmptyisCalled() {
-        let presenter = MainScenePresenter()
-        let viewController = ViewControllerMock()
         presenter.viewController = viewController
         presenter.presentStorageIsEmty()
         XCTAssertTrue(

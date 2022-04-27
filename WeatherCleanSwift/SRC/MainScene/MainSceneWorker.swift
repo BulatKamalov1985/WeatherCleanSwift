@@ -22,8 +22,7 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
         _ request: MainScene.InitForm.Request,
         completion: @escaping (Result<[MainScene.CityWeather], NetworkError>) -> Void
     ) {
-        if request.firstLoad,
-           let response = storage.loadObject() {
+        if request.firstLoad, let response = storage.loadObject() {
             completion(.success(response))
             print("completion(.success(response))")
             return
@@ -38,8 +37,8 @@ final class MainSceneWorker: MainSceneWorkerLogic, NetworkSessionProtocol {
                 case .success(let success):
                     self.storage.saveObject(success)
                     completion(.success([success]))
-                case .failure(_):
-                    completion(.failure(.errorJSON))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
             }
             print("network")
