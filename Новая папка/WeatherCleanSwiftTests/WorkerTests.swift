@@ -123,7 +123,7 @@ class MockTask: URLSessionDataTask {
     override var error: Error? {
         return _error
     }
-    var completionHandler: ((Data?, URLResponse?, Error?) -> Void)!
+    var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
     init(data: Data?, urlResponse: URLResponse?, error: Error?) {
         self.data = data
         self.urlResponse = urlResponse
@@ -131,7 +131,10 @@ class MockTask: URLSessionDataTask {
     }
     override func resume() {
         DispatchQueue.main.async {
-            self.completionHandler(self.data, self.urlResponse, self.error)
+            guard let completionHandler = self.completionHandler else {
+                return
+            }
+            completionHandler(self.data, self.urlResponse, self.error)
         }
     }
 }

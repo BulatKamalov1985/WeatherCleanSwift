@@ -2,13 +2,13 @@
 //  NetworkServiceProtocol.swift
 //  WeatherCleanSwift
 //
-//  Created by Bulat Kamalov on 18.04.2022.
+//  Created by Bulat Kamalov on 15.04.2022.
 //
 
 import Foundation
 
 protocol EndpointTypeProtocol {
-    var stringUrl: String { get }
+    var path: String { get set }
 }
 
 protocol NetworkSessionProtocol {
@@ -21,14 +21,15 @@ protocol NetworkSessionProtocol {
 
 extension EndpointTypeProtocol {
     var url: URL? {
-        URL(string: stringUrl)
+        return URLComponents(string: path)?.url
     }
 }
 
 extension NetworkSessionProtocol {
     func  network<Success: Decodable>(
         endpoint: EndpointTypeProtocol,
-        completion: @escaping (Result<Success, NetworkError>) -> Void
+        completion: @escaping (Result<Success, NetworkError>
+        ) -> Void
     ) {
         guard let url = endpoint.url else {
             completion(.failure(.badRequest))
@@ -42,7 +43,7 @@ extension NetworkSessionProtocol {
                     completion(.success(weather))
                     print("good decode weather", weather.self)
                 } catch {
-                    completion(.failure(.decodeError))
+                    completion(.failure(.badRequest))
                     print("no good")
                     return
                 }
@@ -59,8 +60,4 @@ extension NetworkSessionProtocol {
 
 enum NetworkError: Error {
     case badRequest
-    case errorJSON
-    case srorageIsEmty
-    case unknownError
-    case decodeError
 }
